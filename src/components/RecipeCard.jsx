@@ -1,8 +1,12 @@
 import React from 'react'
+import ShimmerCard from './ShimmerCard';
 
 const RecipeCard = (props) => {
   const{RecipeData}=props;
   const {image,name,servings,cuisine,cookTimeMinutes,rating}=RecipeData;
+  if(!RecipeData){
+    return <ShimmerCard/>;
+  }
 
   return (
    <div className="recipe-card">

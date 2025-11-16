@@ -2,8 +2,10 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import { useEffect ,useState} from 'react';
 import ShimmerDetails from './ShimmerDetails';
+import { useNavigate } from 'react-router';
 
 const RecipeDetails = () => {
+  const navigate=useNavigate();
 
   const {rid}=useParams();
   const[recipeDetails, setRecipeDetails] = useState(null);
@@ -28,7 +30,9 @@ if (!recipeDetails) {
 }
   return (
     <div>
+       <button onClick={() => navigate('/')}>Back to Recipes</button>
       <div className='recipe-details-card'>
+       
         <img className='recipe-details-img' src={image} alt={name} />
         <h1 className='recipe-details-name'>{name}</h1>
         <h2 className='recipe-details-cooktime'>Cook Time: {cookTimeMinutes} minutes</h2>

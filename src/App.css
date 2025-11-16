@@ -1,4 +1,4 @@
-*{
+  *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -52,6 +52,36 @@ body {
 .list:hover {
   color: #ffe0b2;
 }
+/* Back to Recipes button in header */
+.back-btn {
+  background: #fff;
+  color: rgb(215, 95, 115);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.12s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.back-btn:hover {
+  background: #ffe0b2;
+  transform: translateY(-1px);
+  
+
+}
+.back-btn:focus {
+  outline: 3px solid rgba(255,112,67,0.18);
+  outline-offset: 2px;
+}
+.nav-items .list button {
+  background: transparent;
+  color: inherit;
+  border: none;
+  padding: 0;
+}
 .footer {
   left:0;
   right:0;
@@ -77,7 +107,7 @@ body {
 
 
 }
-.recipe-card {
+ .recipe-card {
   background: #fff;
   border-radius: 14px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.10);
@@ -134,6 +164,9 @@ body {
   font-size: 1rem;
   color: #444;
 }
+  
+
+
 .error{
     display:flex;
     flex-direction:column;
@@ -154,9 +187,9 @@ body {
     color:rgb(215, 95, 115);
     margin-top:10px;
 }
-.recipe-details-card {
+  .recipe-details-card {
   max-width: 800px;
-  margin: 40px auto;
+  margin:  auto;
   padding: 24px;
   background: #fff;
   border-radius: 16px;
@@ -221,8 +254,9 @@ body {
   background: #f9f9f9;
   padding: 12px;
   border-radius: 8px;
-}
-/* Shimmer base styles */
+}  
+ 
+
 .shimmer-card {
   max-width: 800px;
   margin: 40px auto;
@@ -340,10 +374,10 @@ body {
   width: 60%;
   height: 14px;
   margin: 6px 0;
-}
+} 
 
 /* Animation */
-@keyframes shimmer1 {
+ @keyframes shimmer1 {
   0% {
     background-position: -200% 0;
   }
@@ -408,4 +442,29 @@ body {
 .filter-btn:hover{
   background:#ffe0b2;
   color:rgb(215, 95, 115);
+} 
+
+
+/* responsive tweaks */
+ @media (max-width: 600px) {
+  .recipe-container {
+    padding: 12px;
+    gap: 12px;
+  }
+  .recipe-card {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
 }
+button {
+  background-color: rgb(215, 95, 115);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+  margin-left:80px ;
+}  
+ 

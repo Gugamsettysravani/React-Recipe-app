@@ -2,7 +2,7 @@ import React from 'react'
 import RecipeCard from './RecipeCard'
 import { useEffect,useState } from 'react'
 import { Link } from 'react-router-dom';
-import Shimmer from './Shimmer';
+
 
 
 const Body = () => {
@@ -27,9 +27,7 @@ const Body = () => {
     setFilteredRecipes(json.recipes);
     
   }
- if (recipes.length === 0) {
-  return <Shimmer/>;
- }
+
   return (
     <>
     <div className='search'>
