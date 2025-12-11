@@ -1,59 +1,60 @@
-import React from 'react'
-import { useParams } from 'react-router-dom';
-import { useEffect ,useState} from 'react';
-import ShimmerDetails from './ShimmerDetails';
-import { useNavigate } from 'react-router';
+
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import ShimmerDetails from "./ShimmerDetails";
 
 const RecipeDetails = () => {
-  const navigate=useNavigate();
-
-  const {rid}=useParams();
-  const[recipeDetails, setRecipeDetails] = useState(null);
+  const { rid } = useParams();
+  const navigate = useNavigate();
+  const [recipeDetails, setRecipeDetails] = useState(null);
 
   useEffect(() => {
-    getRecipeDetails();
-  
-  },[])
+    fetchRecipe();
+  }, []);
 
-const getRecipeDetails = async() => {
+  const fetchRecipe = async () => {
+    const res = await fetch(`https://dummyjson.com/recipes/${rid}`);
+    const data = await res.json();
+    setRecipeDetails(data);
+  };
 
-  const data = await fetch("https://dummyjson.com/recipes/"+ rid);
-  const json = await data.json();
-  console.log(json);
-  setRecipeDetails(json);
+  if (!recipeDetails) return <ShimmerDetails />;
 
-}
-const { name,ingredients,instructions,image,cookTimeMinutes ,id}= recipeDetails || {};
+  const { name, ingredients, instructions, image, cookTimeMinutes } = recipeDetails;
 
-if (!recipeDetails) {
-  return <ShimmerDetails/>;
-}
   return (
-    <div>
-       <button onClick={() => navigate('/')}>Back to Recipes</button>
-      <div className='recipe-details-card'>
-       
-        <img className='recipe-details-img' src={image} alt={name} />
-        <h1 className='recipe-details-name'>{name}</h1>
-        <h2 className='recipe-details-cooktime'>Cook Time: {cookTimeMinutes} minutes</h2>
-        <div className='recipe-details-ingredients'>
-          <h3>Ingredients:</h3>
-          <ul>
-            {ingredients && ingredients.map((ingredient) => (
-              <li key={id}>{ingredient}</li>
-            ))}
-          </ul>
-        </div>
-        <div className='recipe-details-instructions'>
-          <h3> Instructions:</h3>
-          <p>{instructions}</p>
-        </div>
+    <div className="max-w-4xl mx-auto my-10 p-4 md:p-6 bg-white rounded-2xl shadow-lg">
+      <button
+        onClick={() => navigate("/")}
+        className="mb-6 px-5 py-2 bg-slate-200 text-slate-800 rounded-lg shadow hover:bg-slate-300 transition-colors duration-200"
+      >
+        Back to Recipes
+      </button>
+      <img
+        src={image}
+        alt={name}
+        className="w-full h-80 md:h-96 object-cover rounded-xl mb-6"
+      />
+      <h1 className="text-3xl md:text-4xl font-bold text-slate-800 text-center mb-2">{name}</h1>
+      <h2 className="text-lg md:text-xl text-gray-600 text-center mb-4">
+        Cook Time: {cookTimeMinutes} mins
+      </h2>
 
-
+      <div className="mb-6">
+        <h3 className="text-xl font-semibold text-green-600 mb-2">Ingredients:</h3>
+        <ul className="list-disc list-inside space-y-1 text-gray-700 font-medium">
+          {ingredients.map((ing, idx) => (
+            <li key={idx}>{ing}</li>
+          ))}
+        </ul>
       </div>
-        
+
+      <div>
+        <h3 className="text-xl font-semibold text-green-600 mb-2">Instructions:</h3>
+        <p className="bg-gray-50 p-4 rounded-lg text-gray-800">{instructions}</p>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default RecipeDetails;
